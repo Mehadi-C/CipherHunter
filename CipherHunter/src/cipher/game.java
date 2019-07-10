@@ -10,7 +10,8 @@ public class game {
 		// TODO Auto-generated method stub
 		gameBoard game= new gameBoard();
 		game.setVisible(true);
-//		String a;
+//Jack testing
+		//      String a;
 //		
 //		avatar galaxy= new avatar(100, 100, 100);
 //		avatar overlord= new avatar(100, 100, 100);
