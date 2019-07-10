@@ -1,7 +1,8 @@
 package cipher;
 
-public class avatar {
-	 static int health, attack, defence;
+class avatar {
+	
+	 int health, attack, defence;
 
 	    avatar(int att, int def, int h)
 	    {
@@ -10,31 +11,27 @@ public class avatar {
 	        health= h;
 	    }
 
-	    void avatarIsAttacked(int a){
-	        if( a > 0 )
-	        {
+	    public void avatarIsAttacked(int a){
 	            health -= a;
-	        }
-	        else
-	            health += 0;
 	    }
 
-	    static int getAttack(){
+	    public int getAttack(){
 	        return attack;
 	    }
 
-	    static int getHealth(){
+	    public int getHealth(){
+	    	
 	        return health;
 	    }
 
-	    static int getDefence(){
+	    int getDefence(){
 	        return defence;
 	    }
 	    
-	    static boolean death()
-	    {
-	        if( health <= 0 )
-	            return true;
-	        return false;
-	    }
+//	    static boolean death()
+//	    {
+//	        if( health <= 0 )
+//	            return true;
+//	        return false;
+//	    }
 }

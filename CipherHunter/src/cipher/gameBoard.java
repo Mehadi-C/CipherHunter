@@ -13,9 +13,13 @@ public class gameBoard extends JFrame implements ActionListener {
     JLabel team1, team2, h1, s, h2, s1;
     ImageIcon st, st2, bac;
     Image i, img;
-    battle bat= new battle();
-    //does it work
+//  battle bat= new battle();
+    static avatar overlord;
+    static avatar galaxy;
+    
     gameBoard() {
+    	overlord= new avatar(100, 100, 100);
+    	galaxy= new avatar(100, 100, 100);
         //add team1's title
         team1= new JLabel("Heroclix");
         team2=new JLabel("CyberCorps");
@@ -34,18 +38,18 @@ public class gameBoard extends JFrame implements ActionListener {
         s= new JLabel(st);
 
         //Stain Stats
-        att1= new JButton("Galaxy's Attack: " + bat.stain.getAttack());
+        att1= new JButton("Galaxy's Attack");
         att1.addActionListener(this);
-        def1= new JButton("Galaxy's Defence: " + bat.stain.getDefence());
+        def1= new JButton("Galaxy's Defence: " + galaxy.getDefence());
         def1.addActionListener(this);
-        h1= new JLabel("Galaxy's Health: " + bat.stain.getHealth());
+        h1= new JLabel("Galaxy's Health: " + galaxy.getHealth());
         
         //Allmight Stats
-        att2= new JButton("Overlord's Attack: " + bat.allmight.getAttack());
+        att2= new JButton("Overlord's Attack");
         att2.addActionListener(this);
-        def2= new JButton("Overlord's Defence: " + bat.allmight.getDefence());
+        def2= new JButton("Overlord's Defence: " + overlord.getDefence());
         def2.addActionListener(this);
-        h2= new JLabel("Overlord's Health: " + bat.allmight.getHealth());
+        h2= new JLabel("Overlord's Health: " + overlord.getHealth());
 
         //Image for Allmight and Scaling
         st2= new ImageIcon(getClass().getResource("Kagero.jpg"));
@@ -110,6 +114,17 @@ public class gameBoard extends JFrame implements ActionListener {
 
     public void actionPerformed (ActionEvent e)
     {
+    	if (e.getActionCommand ().equals ("Galaxy's Attack"))//if Simulate is pressed
+        {
+    		overlord.avatarIsAttacked(galaxy.getAttack());
+    		h2.setText("Overlord's Health: " + overlord.getHealth());
+    		
+        }
+    	else if (e.getActionCommand ().equals ("Overlord's Attack"))//if Simulate is pressed
+        {
+    		galaxy.avatarIsAttacked(overlord.getAttack());
+    		h1.setText("Galaxy's Health: " + galaxy.getHealth());
+        }
         
         repaint (); //Refresh display of grid
     }
