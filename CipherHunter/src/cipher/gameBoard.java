@@ -9,20 +9,18 @@ public class gameBoard extends JFrame implements ActionListener {
 
 
 	static Scanner sc= new Scanner (System.in);
-    JButton att1, def1, att2, def2;
-    JLabel team1, team2, h1, s, h2, s1;
+    JButton att1, att2, deck;
+    JLabel h1, s, h2, s1;
     ImageIcon st, st2, bac;
     Image i, img;
-//  battle bat= new battle();
+    String answer= "";    
+    
     static avatar overlord;
     static avatar galaxy;
     
     gameBoard() {
     	overlord= new avatar(100, 100, 100);
     	galaxy= new avatar(100, 100, 100);
-        //add team1's title
-        team1= new JLabel("Heroclix");
-        team2=new JLabel("CyberCorps");
 
         //Image for background
         bac= new ImageIcon(getClass().getResource("cf.png"));
@@ -40,15 +38,11 @@ public class gameBoard extends JFrame implements ActionListener {
         //Stain Stats
         att1= new JButton("Galaxy's Attack");
         att1.addActionListener(this);
-        def1= new JButton("Galaxy's Defence: " + galaxy.getDefence());
-        def1.addActionListener(this);
         h1= new JLabel("Galaxy's Health: " + galaxy.getHealth());
         
         //Allmight Stats
         att2= new JButton("Overlord's Attack");
         att2.addActionListener(this);
-        def2= new JButton("Overlord's Defence: " + overlord.getDefence());
-        def2.addActionListener(this);
         h2= new JLabel("Overlord's Health: " + overlord.getHealth());
 
         //Image for Allmight and Scaling
@@ -57,6 +51,9 @@ public class gameBoard extends JFrame implements ActionListener {
         img= i.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
         st2= new ImageIcon(img);
         s1= new JLabel(st2);
+        
+        deck= new JButton("Deck");
+        deck.addActionListener(this);
        
         // 2... Create content pane, set layout
         JPanel content = new JPanel ();        // Create a content pane
@@ -68,17 +65,15 @@ public class gameBoard extends JFrame implements ActionListener {
         JPanel center= new JPanel();
         center.setLayout (new FlowLayout());
 
-        north.add(team1);
         north.add(att1);
-        north.add(def1);
         north.add(h1);
         center.add(s);
         
         center.add(s1);
         south.add(att2);
-        south.add(def2);
         south.add(h2);
-        south.add(team2);
+        
+        south.add(deck);
         
     
         content.add (north, "North"); // Input area
@@ -90,11 +85,12 @@ public class gameBoard extends JFrame implements ActionListener {
         // 4... Set this window's attributes.
         setContentPane (content);
         pack ();
-        setTitle ("TCG");
+        setTitle ("Vetrix");
         setSize (510, 320);
         setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo (null);           // Center window.
     }
+    
 
     class ImagePanel extends JComponent {
         /**
@@ -116,15 +112,28 @@ public class gameBoard extends JFrame implements ActionListener {
     {
     	if (e.getActionCommand ().equals ("Galaxy's Attack"))//if Simulate is pressed
         {
-    		overlord.avatarIsAttacked(galaxy.getAttack());
-    		h2.setText("Overlord's Health: " + overlord.getHealth());
+    		
+    		
+   		overlord.avatarIsAttacked(galaxy.getAttack());
+  		h1.setText("Overlord's Health: " + overlord.getHealth());
     		
         }
     	else if (e.getActionCommand ().equals ("Overlord's Attack"))//if Simulate is pressed
         {
-    		galaxy.avatarIsAttacked(overlord.getAttack());
-    		h1.setText("Galaxy's Health: " + galaxy.getHealth());
+    		
+    		
+  		galaxy.avatarIsAttacked(overlord.getAttack());
+ 		h1.setText("Galaxy's Health: " + galaxy.getHealth());
+    		
         }
+    	if (e.getActionCommand ().equals ("Deck"))//if Simulate is pressed
+        {
+    		System.out.println("HEllo");
+    		Deck d= new Deck();
+    		d.setVisible(true);
+        }
+    	
+        
         
         repaint (); //Refresh display of grid
     }
